@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Merrie Melodies & More</title>
+  <style>
+    /* Square CRT TV Frame */
+    #tv {
+      width: 555px;
+      height: 460px;
+      border: 15px solid rgb(200, 116, 47);
+      border-radius: 2px;
+      background: #000;
+      margin: 5px auto;
+      box-shadow: 0 0 20px #000;
+    }
+
+    #ytplayer {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    body {
+      text-align: center;
+      background: #C0C0C0;
+      color: rgb(200, 116, 47);
+      font-family: garamond;
+      cursor: url('https://cdn-icons-png.flaticon.com/32/85/85711.png'), auto; /* Fixed to usable remote control cursor */
+    }
+
+    button {
+      margin: 5px;
+      padding: 30px 45px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>MMM Television Network</h1>
+
+  <div id="tv">
+    <iframe id="ytplayer"
+      src="https://www.youtube.com/embed/videoseries?list=PLhGipfv0juZVU6ZhfchgxE8xOFUQDZ9ih&autoplay=1&rel=0&modestbranding=1&controls=1"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <button onclick="loadPlaylist('PLMIglMOSEJ-BjCFIGIHAH3nZ1W2viOLvi')">Channel 1 - Looney Tunes</button>
+  <button onclick="loadPlaylist('PLhGipfv0juZVU6ZhfchgxE8xOFUQDZ9ih')">Channel 2 - Looney Tunes Too</button>
+  <button onclick="loadPlaylist('PLBSMz8_gHkCJ6KXKdCXP23-pWFgFKILig')">Channel 3 - Liquid Television</button>
+  <button onclick="loadPlaylist('PLcaaDiIL8DvTlCkyKeu3IrndYfE1eO_oV')">Channel 4 - The Infomercial Channel</button>
+  <button onclick="loadPlaylist('PL0i1N-wlFfiDEdYCjp6nvHR-sEpJGBGXZ')">Channel 5 - Fights</button>
+  <button onclick="loadPlaylist('PLU0HyYmOgH8Xn06fDThwLDh95igfZpurQ')">Channel 6 - Arts & Culture</button>
+
+  <script>
+    const player = document.getElementById('ytplayer');
+
+    // Load last played channel if available
+    window.onload = () => {
+      const lastChannel = localStorage.getItem('lastChannel');
+      if (lastChannel) {
+        player.src = 'https://www.youtube.com/embed/videoseries?list=' + lastChannel + '&autoplay=1&rel=0&modestbranding=1&controls=1';
+      }
+    };
+
+    function loadPlaylist(listId) {
+      const url = 'https://www.youtube.com/embed/videoseries?list=' + listId + '&autoplay=1&rel=0&modestbranding=1&controls=1';
+      player.src = url;
+
+      // Save the last channel ID to localStorage
+      localStorage.setItem('lastChannel', listId);
+    }
+  </script>
+</body>
+</html>
